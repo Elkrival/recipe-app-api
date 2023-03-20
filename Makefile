@@ -1,7 +1,7 @@
 START=$(pwd)
 
 
-test: 
+test:
 	docker-compose run --rm app sh -c "python manage.py test"
 
 lint:
@@ -9,3 +9,12 @@ lint:
 
 wait_for_db:
 	docker-compose run --rm app sh -c "python manage.py wait_for_db"
+
+migrations:
+	docker-compose run --rm app sh -c "python manage.py makemigrations"
+
+wait_and_migrations:
+	docker-compose run --rm app sh -c "python manage.py wait_for_db && python manage.py makemigrations"
+
+createsuperuser:
+	docker-compose run --rm app sh -c "python manage.py createsuperuser"
